@@ -40,9 +40,24 @@ function handleChoice(playerChoice) {
 
     document.getElementById("outcome").textContent = outcome;
     updateScore();
+
+    // Check Win condition
+    if (playerScore === 5 || computerScore === 5) {
+        const winner = playerScore === 5 ? "You win the game!" : "Computer wins the game!";
+        outcome += `\n${winner}`;
+        disableButtons();
+    }
+
+    document.getElementById("outcome").textContent = outcome;
 }
  // Capitalize the first letter Rock, Paper, Scissors
 function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+// End Game Button Disabling
+function disableButtons() {
+    document.getElementById("rock").disabled = true;
+    document.getElementById("paper").disabled = true;
+    document.getElementById("scissor").disabled = true;
+}
