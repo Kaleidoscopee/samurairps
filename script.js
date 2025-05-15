@@ -61,3 +61,16 @@ function disableButtons() {
     document.getElementById("paper").disabled = true;
     document.getElementById("scissor").disabled = true;
 }
+
+// Reset Game
+function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+    updateScore();
+    document.getElementById("outcome").textContent = "Game reset. Choose One.";
+    document.getElementById("rock").disabled = false;
+    document.getElementById("paper").disabled = false;
+    document.getElementById("scissor").disabled = false;
+}
+
+document.getElementById("reset").addEventListener("click", resetGame);
