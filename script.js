@@ -62,6 +62,14 @@ function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+// Append round details to history log
+function addToHistory(playerChoice, computerChoice, outcome) {
+    const history = document.getElementById("history-log");
+    const li = document.createElement("li");
+    li.textContent = `You: ${capitalize(playerChoice)} | Computer: ${capitalize(computerChoice)} → ${outcome}`;
+    history.prepend(li); // newest on top
+}
+
 // Handle player choice, compare to computer, update outcome and scores
 function handleChoice(playerChoice) {
     clearInterval(timer); // Stop timer on choice
@@ -91,6 +99,9 @@ function handleChoice(playerChoice) {
 
     updateScore();
 
+    // Add this round to history
+    addToHistory(playerChoice, computer, outcome);
+
     // Check for game winner
     if (playerScore === 5 || computerScore === 5) {
         const winner = playerScore === 5 ? "You win the game!" : "Computer wins the game!";
@@ -116,6 +127,9 @@ function resetGame() {
     document.getElementById("player-choice").textContent = "None";
     document.getElementById("computer-choice").textContent = "None";
 
+    // Clear history log
+    document.getElementById("history-log").innerHTML = "";
+
     resetButtons(); // Enable buttons + start timer
 }
 
@@ -127,5 +141,5 @@ document.getElementById("scissor").addEventListener("click", () => handleChoice(
 // Attach event listener for reset button
 document.getElementById("reset").addEventListener("click", resetGame);
 
-// Initialize game on page load
+// Start game on load
 resetGame();
